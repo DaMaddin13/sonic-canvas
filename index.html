@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonic Canvas — Musik wird Gemälde</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="top">
+    <div class="brand">
+      <span class="mark">◎</span>
+      <div>
+        <h1>Sonic Canvas</h1>
+        <p class="tag">Musik wird Gemälde · Audio Graffiti</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <button type="button" class="ghost" id="aboutBtn">Idee</button>
+    </nav>
+  </header>
+  <main class="stage">
+    <section class="panel left">
+      <p class="kicker">Erste Projektstufe</p>
+      <h2>Lade ein Stück hoch.<br />Erhalte ein Gemälde.</h2>
+      <p class="lead">Derselbe Audiostream erzeugt stets dasselbe Bild. Stimmung und Form entstehen automatisch aus der Datei.</p>
+      <form id="uploadForm" class="dropzone" aria-label="Audio hochladen">
+        <input id="fileInput" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac" hidden />
+        <div class="drop-inner">
+          <div class="orb" aria-hidden="true"></div>
+          <strong>MP3, WAV, OGG oder M4A ablegen</strong>
+          <span>kurze Schnipsel oder ganze Songs bis ca. 8 Minuten</span>
+          <button type="button" class="primary" id="pickBtn">Datei wählen</button>
+        </div>
+      </form>
+      <div class="demos">
+        <span>Oder zuerst eine Stimmung testen:</span>
+        <div class="demo-row">
+          <button type="button" class="chip" data-demo="metal">Metal</button>
+          <button type="button" class="chip" data-demo="pop">Pop</button>
+          <button type="button" class="chip" data-demo="ambient">Ambient</button>
+          <button type="button" class="chip" data-demo="jazz">Jazz</button>
+        </div>
+      </div>
+    </section>
+    <section class="panel right">
+      <div class="frame" id="frame">
+        <canvas id="art" width="1400" height="1400" aria-label="Generiertes Gemälde"></canvas>
+        <div class="placeholder" id="placeholder">
+          <p>Noch kein Gemälde</p>
+          <small>Wähle eine Audiodatei oder eine Demo-Stimmung</small>
+        </div>
+        <div class="busy" id="busy" hidden>
+          <div class="spinner"></div>
+          <p id="busyText">Analysiere Klang…</p>
+        </div>
+      </div>
+      <div class="meta" id="meta" hidden>
+        <div class="meta-grid">
+          <div><span>Signatur</span><strong id="sig">—</strong></div>
+          <div><span>Stimmung</span><strong id="moodLabel">—</strong></div>
+          <div><span>Energie</span><strong id="energyLabel">—</strong></div>
+          <div><span>Dauer</span><strong id="durLabel">—</strong></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="primary" id="downloadBtn">Gemälde speichern</button>
+          <button type="button" class="ghost" id="againBtn">Gleiche Datei erneut</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <dialog id="about" class="about">
+    <h3>Was Sonic Canvas tun soll</h3>
+    <p>Identische Datei, identisches Bild. Stimmung und Form folgen automatisch aus Spektrum und Dynamik.</p>
+    <p>Stufe 1 läuft vollständig im Browser — die Datei bleibt auf dem Gerät.</p>
+    <button type="button" class="primary" id="closeAbout">Schließen</button>
+  </dialog>
+  <script src="rng.js"></script>
+  <script src="analyze.js"></script>
+  <script src="paint.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
