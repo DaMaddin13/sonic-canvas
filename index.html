@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sonic Canvas — Musik wird Gemälde</title>
+  <meta name="description" content="Lade ein Stück hoch und erhalte ein deterministisches Gemälde. Dieselbe Datei ergibt stets dasselbe Bild." />
+  <meta name="theme-color" content="#0b0a0c" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -23,20 +25,27 @@
       <button type="button" class="ghost" id="aboutBtn">Idee</button>
     </nav>
   </header>
+
   <main class="stage">
     <section class="panel left">
-      <p class="kicker">Erste Projektstufe</p>
+      <p class="kicker">Live · nur im Browser</p>
       <h2>Lade ein Stück hoch.<br />Erhalte ein Gemälde.</h2>
-      <p class="lead">Derselbe Audiostream erzeugt stets dasselbe Bild. Stimmung und Form entstehen automatisch aus der Datei.</p>
+      <p class="lead">
+        Derselbe Audiostream erzeugt stets dasselbe Bild. Eine kleine Änderung in Melodie,
+        Dynamik oder Klangfarbe verschiebt Farben, Dichte und Bewegung — die Stimmung des Stücks
+        bleibt im Gemälde lesbar.
+      </p>
+
       <form id="uploadForm" class="dropzone" aria-label="Audio hochladen">
         <input id="fileInput" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac" hidden />
         <div class="drop-inner">
           <div class="orb" aria-hidden="true"></div>
           <strong>MP3, WAV, OGG oder M4A ablegen</strong>
-          <span>kurze Schnipsel oder ganze Songs bis ca. 8 Minuten</span>
+          <span>kurze Schnipsel, einminütige Skizzen oder ganze Songs bis ca. 8&nbsp;Minuten</span>
           <button type="button" class="primary" id="pickBtn">Datei wählen</button>
         </div>
       </form>
+
       <div class="demos">
         <span>Oder zuerst eine Stimmung testen:</span>
         <div class="demo-row">
@@ -46,7 +55,14 @@
           <button type="button" class="chip" data-demo="jazz">Jazz</button>
         </div>
       </div>
+
+      <ol class="steps">
+        <li>Rohdaten werden gehasht — das ist der deterministische Samen.</li>
+        <li>Spektrum, Energie, Helligkeit und Hüllkurve werden gemessen.</li>
+        <li>Farbe, Strömungsfeld und Pinselzüge folgen diesen Maßen.</li>
+      </ol>
     </section>
+
     <section class="panel right">
       <div class="frame" id="frame">
         <canvas id="art" width="1400" height="1400" aria-label="Generiertes Gemälde"></canvas>
@@ -59,11 +75,13 @@
           <p id="busyText">Analysiere Klang…</p>
         </div>
       </div>
+
       <div class="meta" id="meta" hidden>
         <div class="meta-grid">
           <div><span>Signatur</span><strong id="sig">—</strong></div>
           <div><span>Stimmung</span><strong id="moodLabel">—</strong></div>
           <div><span>Energie</span><strong id="energyLabel">—</strong></div>
+          <div><span>Form</span><strong id="formLabel">—</strong></div>
           <div><span>Dauer</span><strong id="durLabel">—</strong></div>
         </div>
         <div class="actions">
@@ -73,12 +91,26 @@
       </div>
     </section>
   </main>
+
   <dialog id="about" class="about">
     <h3>Was Sonic Canvas tun soll</h3>
-    <p>Identische Datei, identisches Bild. Stimmung und Form folgen automatisch aus Spektrum und Dynamik.</p>
-    <p>Stufe 1 läuft vollständig im Browser — die Datei bleibt auf dem Gerät.</p>
+    <p>
+      Kern ist ein deterministischer Algorithmus: identische Datei, identisches Bild.
+      Weicht die Melodie nur minimal ab, ändert sich das Gemälde mit — nicht chaotisch,
+      sondern in derselben Bildsprache.
+    </p>
+    <p>
+      Die Bildsprache bleibt verwandt, soll aber wie Farbe an einer Wand wirken:
+      Lasuren, Sprühnebel, fette Geste, Tropfen — keine sauberen Kreise.
+      Was wechselt, ist Palette, Druck und Unruhe, abgeleitet aus Spektrum und Dynamik.
+    </p>
+    <p>
+      Stufe&nbsp;1 läuft vollständig im Browser — die Datei bleibt auf dem Gerät.
+      Spätere Stufen können feinere Analyse, Stil-Presets und längere Werke tragen.
+    </p>
     <button type="button" class="primary" id="closeAbout">Schließen</button>
   </dialog>
+
   <script src="rng.js"></script>
   <script src="analyze.js"></script>
   <script src="paint.js"></script>
